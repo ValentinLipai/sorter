@@ -1,31 +1,74 @@
 class Sorter {
   constructor() {
-    // your implementation
+	  this.newAdded = [];
+	  this.sumElems = [];
+	  this.addAfterSort = 0;
+	  this.sortCount = 0;
+	  this.sortingArr = null;
   }
 
   add(element) {
-    // your implementation
+	  this.newAdded.push(element);
+	//   console.log(this.newAdded);
+	  if ( this.sortCount > 0 ) this.addAfterSort = 1;
   }
 
   at(index) {
-    // your implementation
+	this.concatElems();
+    return this.sumElems[index];
   }
 
   get length() {
-    // your implementation
+	this.concatElems();
+	return this.sumElems.length;
   }
 
   toArray() {
-    // your implementation
+	this.concatElems();
+    return this.sumElems;
   }
 
   sort(indices) {
-    // your implementation
+
+	if ( indices.length < 2 || this.addAfterSort > 0  ) return false;
+
+	this.sortingArr = ( this.newAdded.length == 0 ) ? this.sumElems : this.newAdded ;
+
+	// console.log('--- before sort ---' + this.sortingArr);
+
+	let sortingElems = [];
+	let reversed = [];
+	
+	for ( let i = 0; i < indices.length; i++)
+	{
+		sortingElems.push( this.sortingArr[ indices[i] ] );
+	}
+
+	reversed = sortingElems.reverse();
+
+	for ( let y = 0; y < indices.length; y++)
+	{
+		this.sortingArr.splice( indices[y], 1, reversed[y] );
+	}
+
+	// console.log('--- sort ---' + this.sortingArr);
+	this.sortingArr = null;
+	this.concatElems();
+	this.sortCount++;
   }
 
   setComparator(compareFunction) {
     // your implementation
   }
+
+  concatElems() {
+	if ( this.newAdded.length > 0 )
+	{		
+		this.sumElems = this.sumElems.concat(this.newAdded);
+		this.newAdded = [];
+	}
+  }
+
 }
 
 module.exports = Sorter;
