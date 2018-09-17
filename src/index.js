@@ -9,7 +9,6 @@ class Sorter {
 
   add(element) {
 	  this.newAdded.push(element);
-	//   console.log(this.newAdded);
 	  if ( this.sortCount > 0 ) this.addAfterSort = 1;
   }
 
@@ -34,8 +33,6 @@ class Sorter {
 
 	this.sortingArr = ( this.newAdded.length == 0 ) ? this.sumElems : this.newAdded ;
 
-	// console.log('--- before sort ---' + this.sortingArr);
-
 	let sortingElems = [];
 	let reversed = [];
 	
@@ -51,7 +48,6 @@ class Sorter {
 		this.sortingArr.splice( indices[y], 1, reversed[y] );
 	}
 
-	// console.log('--- sort ---' + this.sortingArr);
 	this.sortingArr = null;
 	this.concatElems();
 	this.sortCount++;
